@@ -12,12 +12,12 @@ int main() {
   KA *kereta_api3 = (KA *)malloc(sizeof(KA) * 1);
 
   kereta_api1->kode_kereta = 1;
-  strcpy(kereta_api1->namaKeretaApi, "Cruise Train Seven Stars");
-  strcpy(kereta_api1->destinasi, "Palembang - Jakarta");
-  strcpy(kereta_api1->jam_keberangkatan, "14.25 WIB");
-  strcpy(kereta_api1->jenis_kelas, "Eksekutif | Bisnis | Biasa");
-  kereta_api1->daya_tampung = 150;
-  kereta_api1->sisa_tiket = 150;
+  strcpy(kereta_api1->namaKeretaApi, "Samosir Express");
+  strcpy(kereta_api1->destinasi, "Ambarita - Pangururan");
+  strcpy(kereta_api1->jam_keberangkatan, "19.00 WIB");
+  strcpy(kereta_api1->jenis_kelas, "| Eksekutif | Bisnis | Biasa |");
+  kereta_api1->daya_tampung = 300;
+  kereta_api1->sisa_tiket = 280;
   kereta_api1->kelas_eksekutif = 30;
   kereta_api1->harga_eksekutif = 175000;
   kereta_api1->kelas_bisnis = 40;
@@ -31,10 +31,10 @@ int main() {
   kereta_api1->nextNode = kereta_api2;
 
   kereta_api2->kode_kereta = 2;
-  strcpy(kereta_api2->namaKeretaApi, "Venice Simplon-Orient-Express");
-  strcpy(kereta_api2->destinasi, "Medan - Denpasar");
-  strcpy(kereta_api2->jam_keberangkatan, "19.00 WITA");
-  strcpy(kereta_api2->jenis_kelas, "Eksekutif | Bisnis | Biasa");
+  strcpy(kereta_api2->namaKeretaApi, "Laguboti KBT Express");
+  strcpy(kereta_api2->destinasi, "Laguboti - Sibolga");
+  strcpy(kereta_api2->jam_keberangkatan, "19.00 WIB");
+  strcpy(kereta_api2->jenis_kelas, "| Eksekutif | Bisnis | Biasa |");
   kereta_api2->daya_tampung = 125;
   kereta_api2->sisa_tiket = 125;
   kereta_api2->kelas_eksekutif = 25;
@@ -50,10 +50,11 @@ int main() {
   kereta_api2->nextNode = kereta_api3;
 
   kereta_api3->kode_kereta = 3;
-  strcpy(kereta_api3->namaKeretaApi, "Maharajas Express");
-  strcpy(kereta_api3->destinasi, "Makassar - Pontianak");
-  strcpy(kereta_api3->jam_keberangkatan, "8.45 WITA");
-  strcpy(kereta_api3->jenis_kelas, "Eksekutif | Bisnis | Biasa");
+
+  strcpy(kereta_api3->namaKeretaApi, "Mawar Silangit Express");
+  strcpy(kereta_api3->destinasi, "Parsoburan - Medan");
+  strcpy(kereta_api3->jam_keberangkatan, "10.00 WIB");
+  strcpy(kereta_api3->jenis_kelas, "| Eksekutif | Bisnis | Biasa |");
   kereta_api3->daya_tampung = 90;
   kereta_api3->sisa_tiket = 90;
   kereta_api3->kelas_eksekutif = 15;
