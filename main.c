@@ -267,3 +267,151 @@ int editJadwal() {
 	
 	kelolaJadwal();
 }
+int tambahKota() {
+	kota *k;
+    FILE *fp;
+    int n,i,j;
+
+    k = (kota*)malloc(100*sizeof(kota));
+    fp = fopen("kota.txt","a+");
+    
+	printf("#TAMBAH DATA KOTA#\n\n");
+    for(i=0;i<1;i++){
+    	printf("Tambah Kota : ");
+    	fflush(stdin);
+        scanf("%s %s",k[i].kode,k[i].nama);
+        
+        fwrite(k+i,sizeof(kota),1,fp);
+    }
+    
+    fclose(fp);
+    
+    kelolaKota();
+}
+
+
+int tambahRute() {
+	rute *r;
+	kota k1;
+    FILE *fp,*fp1;
+    int n,i,j;
+
+    r = (rute*)malloc(100*sizeof(rute));
+    fp = fopen("rute.txt","a+");
+    fp1 = fopen("kota.txt","r");
+    
+	printf("#TAMBAH DATA RUTE#\n\n");
+	char kode1[100], kode2[100], kode3[100];
+    for(i=0;i<1;i++){
+    	printf("Tambah Data Rute : ");
+    	fflush(stdin);
+        scanf("%s %s %d %d",r[i].kbrt,r[i].tjn,&r[i].bisnis,&r[i].premium);
+        while(fread(&k1,sizeof(kota),1,fp1)) {
+            if(strcmp(r[i].kbrt,k1.nama)==0) {
+            	strcpy(kode1,k1.kode);
+			} 
+			
+			if (strcmp(r[i].tjn,k1.nama)==0) {
+				strcpy(kode2,k1.kode);
+			}
+			
+			strcpy(kode3,strcat(kode1,"-"));
+			strcpy(r[i].kode,(strcat(kode3,kode2)));
+        }
+        
+        fwrite(r+i,sizeof(rute),1,fp);
+    }
+    
+    printf("\n-----------------------------------------");
+    printf("\nData Berhasil Ditambahkan\n");
+    printf("------------------------------------------");
+    
+    fclose(fp);
+    
+    kelolaRute();
+}
+
+
+int tambahJadwal() {
+	jadwal *j;
+	jadwal j1;
+	rute r1;
+    FILE *fp,*fp1;
+    int n,i;
+
+    j = (jadwal*)malloc(100*sizeof(jadwal));
+    fp = fopen("jadwal.txt","a+");
+    fp1 = fopen("rute.txt","r");
+    
+	printf("#TAMBAH DATA JADWAL#\n\n");
+	
+    for(i=0;i<1;i++){
+    	printf("Tambah Data Jadwal : ");
+    	printf("\n\nKode Jadwal : ");
+    	fflush(stdin);
+        scanf("%s",j[i].kode);
+        printf("\nTanggal : ");
+    	fflush(stdin);
+        scanf("%s",j[i].tanggal);
+        printf("\nWaktu Keberangkatan : ");
+    	fflush(stdin);
+        scanf("%s",j[i].waktuKbrt);
+        printf("\nKeberangkatan : ");
+    	fflush(stdin);
+        scanf("%s",j[i].kbrt);
+        printf("\nTujuan : ");
+    	fflush(stdin);
+        scanf("%s",j[i].tjn);
+        printf("\nKAI : ");
+    	fflush(stdin);
+        scanf("%s",j[i].kai);
+        printf("\nJumlah sisa kursi : ");
+    	fflush(stdin);
+        scanf("%d",&j[i].sisa);
+        
+        
+        
+        while(fread(&r1,sizeof(rute),1,fp1)) {
+            if(strcmp(j[i].kbrt,r1.kbrt)!=0) {
+            	printf("\n\nKeberangkatan %s tidak ada pada daftar !",j[i].kbrt);
+			} 
+			
+			if (strcmp(j[i].tjn,r1.tjn)!=0) {
+				printf("\n\nTujuan %s tidak ada pada daftar !",j[i].tjn);
+			}
+		
+        }
+        
+        fwrite(j+i,sizeof(jadwal),1,fp);
+    }
+    
+    printf("\n-----------------------------------------");
+    printf("\nData Berhasil Ditambahkan\n");
+    printf("------------------------------------------");
+    
+    fclose(fp);
+    
+    kelolaJadwal();
+}
+
+int lihatKota() {
+	kota *k;
+	kota k1;
+    FILE *fp;
+    int n,i,j, counter=1;
+    
+    fp = fopen("kota.txt","r");
+	system("cls");
+	printf("#LIHAT DATA KOTA#");
+	printf("\nData Lengkap Kota");
+	printf("\n-------------------------------------------------------------------\n");
+	printf("No\t\tKode Kota\t\tNama Kota\n");
+	while(fread(&k1,sizeof(kota),1,fp)) { 
+		printf("%d\t\t%s\t\t\t%s\n",counter,k1.kode,k1.nama);
+		counter++;
+    }
+	
+	printf("\n\n-------------------------------------------------------------------");
+    fclose(fp);
+    
+}
