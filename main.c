@@ -1102,3 +1102,221 @@ int kelolaRute() {
 		printf("%d\t\t%s\t\t%s\t\t%s\t\t%d\t\t%d\n",counter,r1.kbrt,r1.tjn,r1.kode,r1.bisnis,r1.premium);
 		counter++;
     }
+    printf("\n\n-------------------------------------------------------------------");
+	printf(":::::::::::::::::::::::");
+	printf("\n\n1. Tambah Data Rute");
+	printf(":::::::::::::::::::::::");
+	printf("\n2. Lihat Data Rute");
+	printf("\n3. Edit Data Rute");
+	printf("\n4. Delete Data Rute");
+	printf("\n99. Menu Utama");
+	
+	printf("\n\nPilihan : ");
+	int choice;
+	fflush(stdin);
+	scanf("%d",&choice);
+	
+	switch(choice) {
+		case 1: 
+			system("cls");
+			tambahRute();
+			break;
+		case 2:
+			system("cls");
+			lihatRute();
+			kelolaRute();
+			break;
+		case 3:
+			system("cls");
+			editRute();
+			break;
+		case 4:
+			hapusRute();
+			system("cls");
+			break;
+		case 99:
+			system("cls");
+			menuAdmin();
+			break;
+		default:
+			printf("Inputan anda tidak valid !");
+	}
+}
+
+int kelolaJadwal() {
+	int i, counter=1;
+    jadwal j1;
+    jadwal *j;
+    FILE *fp;
+	
+	fp = fopen("jadwal.txt","r");
+
+	system("cls");
+	lihatJadwal();
+	
+	printf("\n\n1. Tambah Data Jadwal");
+	printf("\n2. Lihat Data Jadwal");
+	printf("\n3. Edit Data Jadwal");
+	printf("\n4. Delete Data Jadwal");
+	printf("\n99. Menu Utama");
+	
+	printf("\n\nPilihan : ");
+	int choice;
+	fflush(stdin);
+	scanf("%d",&choice);
+	
+	switch(choice) {
+		case 1: 
+			system("cls");
+			tambahJadwal();
+			break;
+		case 2:
+			system("cls");
+			lihatJadwal();
+			kelolaJadwal();
+			break;
+		case 3:
+			system("cls");
+			editJadwal();
+			break;
+		case 4:
+			hapusJadwal();
+			system("cls");
+			break;
+		case 99:
+			system("cls");
+			menuAdmin();
+			break;
+		default:
+			printf("Inputan anda tidak valid !");
+	}
+}
+
+
+int kelolaPengguna() {
+    int i, j, found=0;
+    pengguna s1;
+    FILE *fp, *fp1;
+    char ktp[100];
+    printf(":::::::::::::::::::::::");
+    printf("#KELOLA AKUN BY ADMIN#");
+    printf(":::::::::::::::::::::::");
+    fflush(stdin);
+    printf("Masukkan Nomor KTP : ");
+    scanf("%[^\n]s",ktp);
+
+    fp = fopen("pengguna.txt","r");
+    fp1 = fopen("temp.txt","w");
+    while(fread(&s1,sizeof(pengguna),1,fp)){
+        if(strcmp(s1.ktp,ktp)==0){
+            found = 1;
+            printf("::::::::::::::");
+            printf("Data Pengguna");
+            printf("::::::::::::::");
+            printf("\nNama Lengkap : %s",s1.nama);
+   			printf("\nNomor Handphone : %s",s1.hp);
+   			printf("\nEmail : %s",s1.email);
+   			printf("\nPassword : %s",s1.password);  
+   			printf(":::::::::::::::::::::::");
+   			printf("\n\nUbah Data Pengguna");
+   			printf(":::::::::::::::::::::::");
+            fflush(stdin);
+        	printf("\nNomor KTP : ");
+	        fflush(stdin);
+	        scanf("%[^\n]s",s1.ktp);
+	        fflush(stdin);
+	        printf("Nama Lengkap : ");
+	        scanf("%[^\n]s",s1.nama);
+	        fflush(stdin);
+	        printf("Nomor Handphone : ");
+	        scanf("%[^\n]s",s1.hp);
+	        fflush(stdin);
+	        printf("Email : ");
+	        scanf("%[^\n]s",s1.email);
+	        fflush(stdin);
+	        printf("Password : ");
+	        scanf("%[^\n]s",s1.password);
+	        fflush(stdin);
+	        printf("Re-Password : ");
+	        scanf("%[^\n]s",s1.repassword);
+        } else {
+        	printf("\nTidak Ada Nomor KTP dalam sistem, silahkan coba lagi\n");
+        	kelolaPengguna();
+		}
+        fwrite(&s1,sizeof(pengguna),1,fp1);
+    }
+    fclose(fp);
+    fclose(fp1);
+
+
+    if(found){
+        fp = fopen("pengguna.txt","w");
+        fp1 = fopen("temp.txt","r");
+
+        while(fread(&s1,sizeof(pengguna),1,fp1)){
+            fwrite(&s1,sizeof(pengguna),1,fp);
+            printf("\n\nData Berhasil Diupdate, Berikut Data Terbaru: ");
+            printf("\nNama Lengkap : %s",s1.nama);
+   			printf("\nNomor Handphone : %s",s1.hp);
+   			printf("\nEmail : %s",s1.email);
+   			printf("\nPassword : %s",s1.password);
+
+			}  
+        }
+        fclose(fp);
+        fclose(fp1);
+    }
+
+
+int kelolaProfile() {
+	int i, j, found=0;
+    pengguna s1;
+    FILE *fp, *fp1;
+    char ktp[100];
+    printf("::::::::::::::::::::::::::");
+    printf("#KELOLA AKUN BY PENUMPANG#");
+    printf("::::::::::::::::::::::::::");
+    fflush(stdin);
+    printf("\n\nMasukkan Nomor KTP : ");
+    scanf("%[^\n]s",ktp);
+
+    fp = fopen("pengguna.txt","r");
+    fp1 = fopen("temp.txt","w");
+    while(fread(&s1,sizeof(pengguna),1,fp)){
+        if(strcmp(s1.ktp,ktp)==0){
+        	
+            found = 1;
+            printf("--Data Pengguna--");
+            printf("\nNama Lengkap : %s",s1.nama);
+   			printf("\nNomor Handphone : %s",s1.hp);
+   			printf("\nEmail : %s",s1.email);
+   			printf("\nPassword : %s",s1.password);  
+   			
+   			printf("\n\n--Ubah Data Pengguna--");
+            fflush(stdin);
+        	printf("\nNomor KTP : ");
+	        fflush(stdin);
+	        scanf("%[^\n]s",s1.ktp);
+	        fflush(stdin);
+	        printf("Nama Lengkap : ");
+	        scanf("%[^\n]s",s1.nama);
+	        fflush(stdin);
+	        printf("Nomor Handphone : ");
+	        scanf("%[^\n]s",s1.hp);
+	        fflush(stdin);
+	        printf("Email : ");
+	        scanf("%[^\n]s",s1.email);
+	        fflush(stdin);
+	        printf("Password : ");
+	        scanf("%[^\n]s",s1.password);
+	        fflush(stdin);
+	        printf("Re-Password : ");
+	        scanf("%[^\n]s",s1.repassword);
+        } else {
+        	printf("\nTidak Ada Nomor KTP dalam sistem, silahkan coba lagi\n");
+        	kelolaPengguna();
+		}
+        fwrite(&s1,sizeof(pengguna),1,fp1);
+    }
+    fclose(fp);
+    fclose(fp1);
